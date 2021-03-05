@@ -1,17 +1,16 @@
-
 Date Table = 
 VAR Days = CALENDARAUTO(12)
 
 RETURN ADDCOLUMNS (
     Days,
     "Year", YEAR ( [Date] ),
-    "Year Month Num", YEAR ( [Date] ) * 12 + MONTH ( [Date] ) - 1,
+    "Year Month Num", YEAR ( [Date] ) * 100 + MONTH ( [Date] ),
     "Month Year", FORMAT ( [Date], "MMM YY" ),
     
-    "Year Quarter Num", YEAR ( [Date] ) * 12 + QUARTER(  [Date] ) - 1,
+    "Year Quarter Num", YEAR ( [Date] ) * 100 + QUARTER(  [Date] ),
     "Year Quarter", YEAR( [Date] ) & "-Q" & FORMAT( [Date], "Q"),
 
-    "Year Week Num", YEAR( [Date] ) * 12 + WEEKNUM( [Date], 2 ) - 1,
+    "Year Week Num", YEAR( [Date] ) * 100 + WEEKNUM( [Date], 2 ),
     "Year Week", YEAR( [Date] ) & "-W" & WEEKNUM([Date], 2 ),
 
     "Month Num", MONTH ( [Date] ),
@@ -24,5 +23,7 @@ RETURN ADDCOLUMNS (
     "Week", "W" & WEEKNUM( [Date], 2 ),
     
     "Day Num", WEEKDAY( [Date] , 2), 
-    "Day", FORMAT( [Date], "DDD")
+    "Day", FORMAT( [Date], "DDD"),
+
+    "Weekday or Weekend", IF(WEEKDAY([Date],2)>=6, "Weekend", "Weekday")
 )
