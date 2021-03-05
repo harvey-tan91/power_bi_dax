@@ -1,5 +1,6 @@
 Time Table = 
-// Ojective: Generate a time table with minute granularity
+// Objective: Generate a time table with minute granularity
+// Use the Timekey column as the key to form relationship with other tables
 
 VAR series = 
     GENERATESERIES(1, 1440, 1)
