@@ -1,4 +1,4 @@
-Time Table = 
+Time = 
 // Objective: Generate a time table with minute granularity
 // Use the Timekey column as the key to form relationship with other tables
 

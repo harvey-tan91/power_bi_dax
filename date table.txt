@@ -1,29 +1,33 @@
-Date Table = 
+Date = 
 VAR Days = CALENDARAUTO(12)
 
 RETURN ADDCOLUMNS (
     Days,
+
     "Year", YEAR ( [Date] ),
-    "Year Month Num", YEAR ( [Date] ) * 100 + MONTH ( [Date] ),
+
+    "Year Month Num", YEAR ( [Date] ) * 10000 + MONTH ( [Date] ), -- Use this column to sort "Month Year"
     "Month Year", FORMAT ( [Date], "MMM YY" ),
     
-    "Year Quarter Num", YEAR ( [Date] ) * 100 + QUARTER(  [Date] ),
+    "Year Quarter Num", YEAR ( [Date] ) * 10000 + QUARTER(  [Date] ), -- Use this column to sort "Year Quarter"
     "Year Quarter", YEAR( [Date] ) & "-Q" & FORMAT( [Date], "Q"),
 
-    "Year Week Num", YEAR( [Date] ) * 100 + WEEKNUM( [Date], 2 ),
+    "Year Week Num", YEAR( [Date] ) * 10000 + WEEKNUM( [Date], 2 ), -- Use this column to sort "Year Week"
     "Year Week", YEAR( [Date] ) & "-W" & WEEKNUM([Date], 2 ),
 
-    "Month Num", MONTH ( [Date] ),
+    "Month Num", MONTH ( [Date] ), -- Use this column to sort "Month"
     "Month", FORMAT ( [Date], "MMM" ),
 
-    "Quarter Num", FORMAT( [Date], "Q"),
+    "Quarter Num", FORMAT( [Date], "Q"), -- Use this column to sort "Quarter"
     "Quarter", "Q" & FORMAT( [Date], "Q"),
     
-    "Week Num", WEEKNUM( [Date], 2 ),
+    "Week Num", WEEKNUM( [Date], 2 ), -- Use this column to sort "Week"
     "Week", "W" & WEEKNUM( [Date], 2 ),
     
-    "Day Num", WEEKDAY( [Date] , 2), 
+    "Day Num", WEEKDAY( [Date] , 2), -- Use this column to sort "Day"
     "Day", FORMAT( [Date], "DDD"),
 
-    "Weekday or Weekend", IF(WEEKDAY([Date],2)>=6, "Weekend", "Weekday")
+    "Weekday or Weekend", IF(WEEKDAY([Date],2)>=6, "Weekend", "Weekday"),
+
+    "First/Second Half", IF( MONTH( [Date] ) <= 6, "H1", "H2")
 )
