@@ -1,0 +1,70 @@
+<root>
+<block id="Enterprise DNA Deneb Snippets 02 - Column Charts">
+</block>
+
+<block id="exchange X and Y ENCODING block">
+  "encoding": {
+    "x": {
+      "field": "Country",
+      "type": "nominal"
+    },
+    "y": {
+      "field": "Total Sales",
+      "type": "quantitative"
+    }
+  }
+</block>
+<block id="set X-axis LABEL angle for BAR mark">
+  "axis": {"labelAngle": 0}
+</block>
+
+<block id="REFERENCE - FULL CODE">
+WITH FORMATTED Y AXIS AND DATA LABELS
+{
+  "data": {"name": "dataset"},
+  "layer": [
+    {
+      "mark": {"type": "bar"},
+      "encoding": {
+        "x": {
+          "field": "Country",
+          "type": "nominal",
+          "axis": {"labelAngle": 0}
+        },
+        "y": {
+          "field": "Total Sales",
+          "type": "quantitative",
+          "axis": {
+            "format": "#0,,.0M",
+            "formatType": "pbiFormat"
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dy": -10
+      },
+      "encoding": {
+        "x": {"field": "Country"},
+        "y": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Total Sales",
+          "type": "quantitative",
+          "format": "#0,,.0M",
+          "formatType": "pbiFormat"
+        }
+      }
+    }
+  ]
+}
+</block>
+
+
+
+</root>

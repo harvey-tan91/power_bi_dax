@@ -1,0 +1,39 @@
+<root>
+<block id="Enterprise DNA Deneb Snippets 11 - Visual Studio Code">
+</block>
+
+<block id="replace data block">
+REMOVE
+	"data": {"name": "dataset"},
+
+ADD
+    "data": {
+        "values": [
+          { "Needle Percent": 0.77 }
+        ]
+      },
+</block> 
+<block id="adjust AVERAGE START PERCENT">
+CHANGE
+      {
+        "calculate": "49",
+        "as": "Average Start Percent"
+      }
+</block>
+<block id="adjust NEEDLE PERCENT">
+CHANGE
+    "data": {
+        "values": [
+          { "Needle Percent": 0.44 }
+        ]
+      },
+</block>
+<block id="adjust GOOD colour">
+CHANGE
+        "encoding": {
+          "color": {"value": "blue"}
+        }
+</block>
+
+
+</root>

@@ -1,0 +1,30 @@
+<root>
+<block id="Enterprise DNA Deneb Snippets 00 - Colours">
+</block>
+
+STANDARD
+<block id="add PARAMS block (create [my_color])">
+  "params": [
+    {
+      "name": "my_color",
+      "value": "#0000FF"
+    }
+  ],
+</block> 
+<block id="add ENCODING block (use [my_color])">
+    "color": {
+      "value": {"expr": "my_color"}
+    }
+</block>
+<block id="add ENCODING block (use named VEGA SCHEME)">
+ "color": {
+      "field": "series",
+      "scale": {"scheme": "category20b"}
+    }
+	
+dark2
+set1
+set2
+</block>
+
+</root>

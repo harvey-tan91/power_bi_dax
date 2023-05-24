@@ -1,0 +1,239 @@
+<root>
+<block id="Enterprise DNA Deneb Snippets 01 - Bar Charts">
+</block>
+
+BAR CHART
+<block id="BAR (1): add MARK block (bar)">
+{
+  "mark": {"type": "bar"},
+}
+</block> 
+<block id="BAR (2): add ENCODING block (for X and Y)">
+  "encoding": {
+    "y": {
+      "field": "Country",
+      "type": "nominal"
+    },
+    "x": {
+      "field": "Total Sales",
+      "type": "quantitative"
+    }
+  }
+</block>
+<block id="BAR (3): add LAYER and TEXT block (for data labels)">
+ABOVE "BAR" MARK
+  "layer": [
+    {
+
+    }
+  ]
+
+MOVE "BAR" MARK INSIDE LAYER BLOCK
+
+ADD "TEXT" MARK BELOW "BAR" MARK
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5
+      },
+      "encoding": {
+        "y": {
+          "field": "Country",
+          "type": "nominal"
+        },
+        "x": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        }
+      }
+    }
+</block>
+<block id="BAR (4): move X AND Y ENCODING above LAYER (and remove from MARKs)">
+CUT X AND Y ENCODING FROM "BAR" MARK
+PASTE X AND Y ENCODING ABOVE "LAYER" BLOCK
+DELETE X AND Y ENCODING FROM "TEXT" MARK
+</block>
+
+<block id="OPTION: add sorting by [Total Sales] descending">
+ADD TO Y ENCODING  
+  "sort": {
+	"op": "sum",
+	"field": "Total Sales",
+	"order": "descending"
+  }
+</block>
+<block id="OPTION: add formatting to the DATA LABELS">
+  "format": "#0,,.0M",
+  "formatType": "pbiFormat"
+</block>
+<block id="OPTION: add gradient COLOUR">
+ADD ENCODING AND COLOR BLOCK TO "BAR" MARK
+      "encoding": {
+        "color": {
+          "field": "Total Sales",
+          "type": "quantitative",
+          "legend": null,
+          "scale": {
+            "scheme": "pbiColorLinear"
+          }
+        }
+      }
+</block>
+<block id="OPTION: add TITLE block">
+  "title": {
+    "text": "Total Sales by Country",
+    "anchor": "start",
+    "align": "left"
+  }
+</block>
+
+STACKED BAR CHART
+<block id="STACKED BAR (1): replace v1.2 JSON with simple JSON">
+{
+  "data": {"name": "dataset"},
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  "encoding": {
+    "y": {
+      "field": "Country",
+      "type": "nominal"
+    },
+    "x": {
+      "field": "Total Sales",
+      "type": "quantitative"
+    }
+  }
+}
+</block>
+<block id="STACKED BAR (2): add AGGREGATE to X ENCODING">
+ADD TO X ENCODING
+      "aggregate": "sum"
+</block>
+<block id="STACKED BAR (3): add COLOUR block">
+ADD AFTER X BLOCK IN ENCODING BLOCK
+    "color": {
+      "field": "Channel",
+      "type": "nominal"
+    }
+</block>
+
+100% BAR CHART
+<block id="100% BAR (1): add NORMALIZE to X ENCODING">
+ADD TO X ENCODING
+      "stack": "normalize"
+</block>
+
+COLUMN CHART
+<block id="COLUMN (1): reuse simple JSON from STACK (1) above">
+REPLACE EMPTY SPECIFICATION
+</block>
+<block id="COLUMN (2): exchange X and Y in ENCODING block">
+EXCHANGE X AND Y
+</block>
+<block id="COLUMN (3): set X-AXIS LABELANGLE to 0 in X ENCODING block">
+ADD TO X ENCODING
+      "axis": {"labelAngle": 0}
+</block>
+<block id="COLUMN (4): add sorting by [Total Sales] descending">
+ADD TO X ENCODING  
+  "sort": {
+	"op": "sum",
+	"field": "Total Sales",
+	"order": "descending"
+  }
+</block>
+
+<block id="REFERENCE - FULL CODE">
+BAR CHART
+{
+  "title": {
+    "text": "Total Sales by Country",
+    "anchor": "start",
+    "align": "left"
+  },
+  "data": {"name": "dataset"},
+  "encoding": {
+    "y": {
+      "field": "Country",
+      "type": "nominal",
+      "sort": {
+        "op": "sum",
+        "field": "Total Sales",
+        "order": "descending"
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "bar"},
+      "encoding": {
+        "x": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "Total Sales",
+          "type": "quantitative",
+          "legend": null,
+          "scale": {
+            "scheme": "pbiColorLinear"
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5
+      },
+      "encoding": {
+        "x": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Total Sales",
+          "type": "quantitative",
+          "format": "#0,,.0M",
+          "formatType": "pbiFormat"
+        }
+      }
+    }
+  ]
+}
+
+COLUMN CHART
+{
+  "data": {"name": "dataset"},
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {
+      "field": "Country",
+      "type": "nominal",
+      "axis": {"labelAngle": 0},
+      "sort": {
+        "op": "sum",
+        "field": "Total Sales",
+        "order": "descending"
+      }
+    },
+    "y": {
+      "field": "Total Sales",
+      "type": "quantitative"
+    }
+  }
+}
+</block>
+
+</root>

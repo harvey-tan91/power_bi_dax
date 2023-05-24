@@ -1,0 +1,253 @@
+<root>
+<block id="Enterprise DNA Deneb Snippets 03 - Line Charts">
+</block>
+
+LINE CHART
+<block id="LINE (1): add MARK block (line)">
+{
+  "mark": {"type": "line"}
+}
+</block> 
+<block id="LINE (2): add ENCODING block (for X, Y)">
+  "encoding": {
+    "x": {
+      "field": "Date",
+      "type": "temporal"
+    },
+    "y": {
+      "field": "2021 Q1 Sales",
+      "type": "quantitative"
+    }
+  }
+</block>
+<block id="LINE (3): add ENCODING block (for colour)">
+ADD TO ENCODING BLOCK
+    "color": {
+      "field": "Country",
+      "type": "nominal"
+    }
+	
+ADD INTEGRATION WITH POWER BI THEME
+ADD TO COLOUR BLOCK
+      "scale": {
+        "scheme": "pbiColorNominal"
+      }
+</block>
+<block id="LINE (4): add PARAMETER for line interpolation (smoothing) options">
+ADD PARAMS BLOCK
+  "params": [
+    {
+      "name": "interpolate",
+      "value": "linear",
+      "bind": {
+        "input": "select",
+        "options": [
+          "basis",
+          "cardinal",
+          "catmull-rom",
+          "linear",
+          "monotone",
+          "natural",
+          "step",
+          "step-after",
+          "step-before"
+        ]
+      }
+    }
+]
+	
+ADD TO LINE MARK
+	"interpolate": {"expr": "interpolate"}
+</block>
+
+AREA CHART
+<block id="AREA (1): change MARK block (area)">
+	"mark": {"type": "area"}
+</block>
+<block id="AREA (2): add TENSION">
+ADD TO PARAMS
+    {
+      "name": "tension",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 1,
+        "step": 0.05
+      }
+    }
+	
+ADD TO AREA MARK
+    "tension": {"expr": "tension"}
+</block>
+<block id="AREA (3): add GRADIENT colouring (dark green to white)">
+REMOVE COLOR BLOCK FROM ENCODING
+
+ADD TO AREA MARK
+    "line": {
+      "color": "darkgreen"
+    },
+    "color": {
+      "x1": 1,
+      "y1": 1,
+      "x2": 1,
+      "y2": 0,
+      "gradient": "linear",
+      "stops": [
+        {"offset": 0, "color": "white"},
+        {
+          "offset": 1,
+          "color": "darkgreen"
+        }
+      ]
+    }
+</block>
+
+TRAIL MARK
+<block id="TRAIL (1): change MARK block (trail)">
+	"mark": {"type": "trail"}
+</block>
+<block id="TRAIL (2): add trail SIZE">
+ADD TO ENCODING BLOCK
+	"size": {"field": "2021 January Sales", "type": "quantitative"}
+</block>
+
+<block id="REFERENCE - FULL CODE">
+LINE
+{
+  "data": {"name": "dataset"},
+  "params": [
+    {
+      "name": "interpolate",
+      "value": "linear",
+      "bind": {
+        "input": "select",
+        "options": [
+          "basis",
+          "cardinal",
+          "catmull-rom",
+          "linear",
+          "monotone",
+          "natural",
+          "step",
+          "step-after",
+          "step-before"
+        ]
+      }
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "interpolate": {
+      "expr": "interpolate"
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "Date",
+      "type": "temporal"
+    },
+    "y": {
+      "field": "2021 Q1 Sales",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "Country",
+      "type": "nominal",
+      "scale": {
+        "scheme": "pbiColorNominal"
+      }
+    }
+  }
+}
+
+
+AREA
+{
+  "data": {"name": "dataset"},
+  "params": [
+    {
+      "name": "interpolate",
+      "value": "linear",
+      "bind": {
+        "input": "select",
+        "options": [
+          "basis",
+          "cardinal",
+          "catmull-rom",
+          "linear",
+          "monotone",
+          "natural",
+          "step",
+          "step-after",
+          "step-before"
+        ]
+      }
+    },
+    {
+      "name": "tension",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 1,
+        "step": 0.05
+      }
+    }
+  ],
+  "mark": {
+    "type": "area",
+    "interpolate": {
+      "expr": "interpolate"
+    },
+    "tension": {"expr": "tension"},
+    "line": {"color": "darkgreen"},
+    "color": {
+      "x1": 1,
+      "y1": 1,
+      "x2": 1,
+      "y2": 0,
+      "gradient": "linear",
+      "stops": [
+        {"offset": 0, "color": "white"},
+        {
+          "offset": 1,
+          "color": "darkgreen"
+        }
+      ]
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "Date",
+      "type": "temporal"
+    },
+    "y": {
+      "field": "2021 January Sales",
+      "type": "quantitative"
+    }
+  }
+}
+
+TRAIL
+{
+  "data": {"name": "dataset"},
+  "mark": {"type": "trail"},
+  "encoding": {
+    "x": {
+      "field": "Date",
+      "type": "temporal"
+    },
+    "y": {
+      "field": "2021 Q1 Sales",
+      "type": "quantitative"
+    },
+    "size": {
+      "field": "2021 January Sales",
+      "type": "quantitative"
+    }
+  }
+}
+</block>
+
+</root>

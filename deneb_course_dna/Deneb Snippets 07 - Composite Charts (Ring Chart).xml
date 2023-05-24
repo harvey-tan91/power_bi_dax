@@ -1,0 +1,206 @@
+<root>
+<block id="Enterprise DNA Deneb Snippets 07 - Composite Charts (Ring Chart)">
+</block>
+
+<block id="add a TRANSFORM block to extend dataset">
+  "transform": [
+    {
+      "calculate": "2*PI*datum['Ring1_Percent']",
+      "as": "Ring1_Percent_Radians"
+    },
+    {
+      "calculate": "2*PI*datum['Ring2_Percent']",
+      "as": "Ring2_Percent_Radians"
+    },
+    {
+      "calculate": "2*PI*datum['Ring3_Percent']",
+      "as": "Ring3_Percent_Radians"
+    }
+  ],
+</block> 
+<block id="add a PARAMS block to name/set/calculate additional values for the visual">
+  "params": [
+    {"name": "ring_max", "value": 200},
+    {"name": "ring_width", "value": 20},
+    {"name": "ring_gap", "value": 5},
+    {
+      "name": "ring0_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "ring1_color",
+      "value": "#0F4C81"
+    },
+    {
+      "name": "ring2_color",
+      "value": "#6086BC"
+    },
+    {
+      "name": "ring3_color",
+      "value": "#ACBDC8"
+    },
+    {
+      "name": "label_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "ring_background_radians",
+      "expr": "2*PI"
+    },	
+    {
+      "name": "ring_background_opacity",
+      "value": 0.3
+    },
+    {
+      "name": "ring0_percent",
+      "value": 100
+    },
+    {
+      "name": "ring0_outer",
+      "expr": "ring_max+2"
+    },
+    {
+      "name": "ring0_inner",
+      "expr": "ring_max+1"
+    },
+    {
+      "name": "ring1_outer",
+      "expr": "ring0_inner-ring_gap"
+    },
+    {
+      "name": "ring1_inner",
+      "expr": "ring1_outer-ring_width"
+    },
+    {
+      "name": "ring1_middle",
+      "expr": "(ring1_outer+ring1_inner)/2"
+    },
+    {
+      "name": "ring2_outer",
+      "expr": "ring1_inner-ring_gap"
+    },
+    {
+      "name": "ring2_inner",
+      "expr": "ring2_outer-ring_width"
+    },
+    {
+      "name": "ring2_middle",
+      "expr": "(ring2_outer+ring2_inner)/2"
+    },
+    {
+      "name": "ring3_outer",
+      "expr": "ring2_inner-ring_gap"
+    },
+    {
+      "name": "ring3_inner",
+      "expr": "ring3_outer-ring_width"
+    },
+    {
+      "name": "ring3_middle",
+      "expr": "(ring3_outer+ring3_inner)/2"
+    }
+  ],
+</block>
+<block id="add a LAYER block">
+  "layer": [
+    {
+    }
+  ]	
+</block>
+<block id="add an ARC mark for RING 1 BACKGROUND">
+	{
+	  "name": "RING 1 BACKGROUND",
+	  "mark": {
+		"type": "arc",
+		"outerRadius": {
+		  "expr": "ring1_outer"
+		},
+		"innerRadius": {
+		  "expr": "ring1_inner"
+		},
+		"theta": 0,
+        "theta2": {
+          "expr": "ring_background_radians"
+        }
+	  },
+	  "encoding": {
+		"color": {
+		  "value": {
+			"expr": "ring1_color"
+		  }
+		},
+		"opacity": {
+		  "value": {
+			"expr": "ring_background_opacity"
+		  }
+		}
+	  }
+	}
+</block>
+<block id="add an ARC mark for RING 1 PERCENT">
+	{
+	  "name": "RING 1 PERCENT",
+	  "mark": {
+		"type": "arc",
+		"outerRadius": {
+		  "expr": "ring1_outer"
+		},
+		"innerRadius": {
+		  "expr": "ring1_inner"
+		},
+		"theta": 0,
+		"theta2": {
+		  "expr": "datum['Ring1_Percent_Radians']"
+		}
+	  },
+	  "encoding": {
+		"color": {
+		  "value": {
+			"expr": "ring1_color"
+		  }
+		}
+	  }
+	}
+</block>
+<block id="add a TEXT mark for RING 1 LABEL">
+    {
+      "name": "RING 1 LABEL",
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 5,
+        "dy": {
+          "expr": "-1*ring1_middle"
+        },
+        "fontSize": 12
+      },
+      "encoding": {
+        "text": {
+          "field": "Ring1_Percent",
+          "type": "nominal",
+          "format": "#%",
+          "formatType": "pbiFormat"
+        },
+        "color": {
+          "value": {
+            "expr": "label_color"
+          }
+        }
+      }
+    }
+</block>
+<block id="copy the RING1 marks, edit, and paste for RING2 and RING3">
+COPY RING 1 MARKS (3) INTO NOTEPAD++ 2x and SEARCH\REPLACE RING 1 for RING 2, RING 1 for RING 3
+COPY RING 2 MARKS (3) into POWER BI\DENEB
+COPY RING 3 MARKS (3) into POWER BI\DENEB
+</block>
+<block id="make corners rounded">
+ADD TO ARC MARK FOR RING 1
+ADD TO ARC MARK FOR RING 2
+ADD TO ARC MARK FOR RING 3
+
+		"cornerRadius": 10
+</block>
+
+</root>

@@ -1,0 +1,166 @@
+<root>
+<block id="Enterprise DNA Deneb Snippets 06 - Linked Charts (Overview and Detail)">
+</block>
+
+SETUP
+<block id="add VCONCAT block">
+ADD AFTER DATA BLOCK
+  "vconcat": [
+    {
+	}
+]
+</block>
+
+OVERVIEW (WHERE SELECTION IS MADE)
+<block id="add OVERVIEW AREA mark">
+    {
+	  "name": "OVERVIEW",
+      "mark": {
+        "type": "area",
+        "color": "#6086BC"
+      },
+      "encoding": {
+        "x": {
+          "field": "Date",
+          "type": "temporal",
+          "timeunit": "month"
+        },
+        "y": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        }
+      }
+    }
+</block>
+<block id="set SIZE">
+ADD TO OVERVIEW AFTER NAME
+      "width": 1000,
+      "height": 200
+</block>
+<block id="add TITLE block">
+ADD TO OVERVIEW AFTER MARK
+      "title": {
+        "text": "Overview",
+        "anchor": "start"
+      }
+</block>
+
+SECONDARY (RESPONDS TO SELECTION)
+<block id="add DETAIL AREA mark">
+    {
+      "name": "DETAIL",
+      "mark": {
+        "type": "area",
+        "color": "#6086BC"
+      },
+      "encoding": {
+        "x": {
+          "field": "Date",
+          "type": "temporal",
+          "axis": {"title": "Date"}
+        },
+        "y": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        }
+      }
+    }
+</block>
+<block id="set SIZE">
+      "width": 1000,
+      "height": 250
+</block>
+<block id="add TITLE block">
+      "title": {
+        "text": "Detail",
+        "anchor": "start"
+      }
+</block>
+
+LINKING
+<block id="add the BRUSH (i.e., the SELECTION) to the OVERVIEW AREA CHART">
+ADD TO OVERVIEW AFTER TITLE BLOCK
+      "selection": {
+        "brush": {
+          "type": "interval",
+          "encodings": ["x"]
+        }
+      },
+</block>
+<block id="add the TRANSFORM block (i.e., the FILTER) to the DETAIL AREA CHART">
+ADD TO DETAIL AFTER ENCODING BLOCK
+      "transform": [
+        {"filter": {"param": "brush"}}
+      ]
+</block>
+
+<block id="REFERENCE - FULL CODE">
+{
+  "data": {"name": "dataset"},
+  "vconcat": [
+    {
+      "name": "OVERVIEW",
+      "width": 1000,
+      "height": 200,
+      "mark": {
+        "type": "area",
+        "color": "#6086BC"
+      },
+      "title": {
+        "text": "Overview",
+        "anchor": "start"
+      },
+      "selection": {
+        "brush": {
+          "type": "interval",
+          "encodings": ["x"]
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "Date",
+          "type": "temporal",
+          "timeunit": "month"
+        },
+        "y": {
+          "field": "Total Sales",
+          "type": "quantitative",
+          "axis": {
+            "tickCount": 3,
+            "grid": false
+          }
+        }
+      }
+    },
+    {
+      "name": "DETAIL",
+      "width": 1000,
+      "height": 250,
+      "mark": {
+        "type": "area",
+        "color": "#6086BC"
+      },
+      "title": {
+        "text": "Detail",
+        "anchor": "start"
+      },
+      "encoding": {
+        "x": {
+          "field": "Date",
+          "type": "temporal",
+          "axis": {"title": "Date"}
+        },
+        "y": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        }
+      },
+      "transform": [
+        {"filter": {"param": "brush"}}
+      ]
+    }
+  ]
+}
+</block>
+
+</root>

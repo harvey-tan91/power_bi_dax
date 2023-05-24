@@ -1,0 +1,170 @@
+<root>
+<block id="Enterprise DNA Deneb Snippets 08 - Example - Bar Chart with Internal Labels">
+</block>
+
+<block id="add BAR mark use SIMPLE BAR CHART template">
+{
+  "data": {"name": "dataset"},
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  "encoding": {
+    "y": {
+      "field": "Country",
+      "type": "nominal"
+    },
+    "x": {
+      "field": "Total Sales",
+      "type": "quantitative"
+    }
+  }
+}
+DELETE OPACITY BLOCK
+</block> 
+<block id="turn off Y-axis and add sort to BAR">
+ADD TO Y ENCODING
+      "axis": null,
+      "sort": {
+        "op": "sum",
+        "field": "Total Sales",
+        "order": "descending"
+      }
+</block>
+<block id="surround BAR mark with LAYER block">
+ADD ABOVE BAR MARK
+ "layer": [
+    {
+	
+ADD AT END
+  }
+]
+
+ADD NAME PROPERTY TO BAR MARK
+  "name": "BAR"
+</block>
+<block id="add [COUNTRY] TEXT block">
+    {
+      "name": "COUNTRY LABEL",
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "x": 5,
+        "color": "#FFFFFF",
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "text": {"field": "Country"}
+      }
+    }
+</block>
+<block id="add [TOTAL SALES] TEXT block">
+    {
+      "name": "SALES LABEL",
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -5,
+        "fontSize": 10,
+        "fontStyle": "italic",
+        "color": "#FFFFFF"
+      },
+      "encoding": {
+        "x": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Total Sales",
+          "type": "quantitative",
+          "format": "#0,,.0M",
+          "formatType": "pbiFormat"
+        }
+      }
+    }
+</block>
+
+<block id="REFERENCE - FULL CODE">
+{
+  "title": {
+    "text": "Bar Chart with Internal Labels and Values",
+    "anchor": "start",
+    "align": "left",
+    "font": "Verdana",
+    "fontSize": 16,
+    "fontWeight": "bold",
+    "offset": 10
+  },
+  "height": 500,
+  "data": {"name": "dataset"},
+  "encoding": {
+    "y": {
+      "field": "Country",
+      "type": "nominal",
+      "axis": null,
+      "sort": {
+        "op": "sum",
+        "field": "Total Sales",
+        "order": "descending"
+      }
+    }
+  },
+  "layer": [
+    {
+      "name": "BAR",
+      "mark": {"type": "bar"},
+      "encoding": {
+        "x": {
+          "field": "Total Sales",
+          "type": "quantitative",
+          "axis": {
+            "tickCount": 5,
+            "format": "#0,,.M",
+            "formatType": "pbiFormat"
+          }
+        }
+      }
+    },
+    {
+      "name": "COUNTRY LABEL",
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "x": 5,
+        "color": "#FFFFFF",
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "text": {"field": "Country"}
+      }
+    },
+    {
+      "name": "SALES LABEL",
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -5,
+        "fontSize": 10,
+        "fontStyle": "italic",
+        "color": "#FFFFFF"
+      },
+      "encoding": {
+        "x": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Total Sales",
+          "type": "quantitative",
+          "format": "#0,,.0M",
+          "formatType": "pbiFormat"
+        }
+      }
+    }
+  ]
+}
+</block>
+
+</root>

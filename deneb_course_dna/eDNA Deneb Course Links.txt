@@ -1,0 +1,20 @@
+eDNA Deneb Course Links
+=============================
+
+Deneb Website:
+https://deneb-viz.github.io/
+
+Vega-Lite website:
+https://vega.github.io/vega-lite/
+
+The Deeper Concepts \ Color Schemes \ Managing via Properties \ Report Theme Integration section of the Deneb website:
+https://deneb-viz.github.io/schemes#managing-via-properties
+
+The MARK subsection of the DOCUMENTATION section of the Vega-Lite website:
+https://vega.github.io/vega-lite/docs/mark.html
+
+Vega-Lite Colour Palettes
+https://vega.github.io/vega/docs/schemes/#:~:text=Cyclical-,Categorical%20Schemes,-Categorical%20color%20schemes
+
+Creating a Heatmap Chart Combo Using Deneb (with Daniel Marsh-Patrick)
+https://www.youtube.com/watch?v=FlzlSozY3VE

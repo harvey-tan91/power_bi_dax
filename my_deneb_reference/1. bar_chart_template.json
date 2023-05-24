@@ -1,0 +1,57 @@
+{
+    "title": {
+      "text": "Total Sales by Country",
+      "anchor": "start",
+      "align": "left",
+      "font": "arial",
+      "fontSize": 24
+    },
+    "data": {"name": "dataset"},
+    "encoding": {
+      "y": {
+        "field": "Country",
+        "type": "nominal",
+        "sort": {
+          "op": "sum",
+          "field": "Total Sales",
+          "order": "descending"
+        }
+      },
+      "x": {
+        "field": "Total Sales",
+        "type": "quantitative",
+        "axis" : {"grid": false}
+      }
+    },
+    "layer": [
+      {
+        "mark": {"type": "bar"},
+        "encoding": {
+          "color": {
+            "field": "Total Sales",
+            "type": "quantitative",
+            "legend": null,
+            "scale": {
+              "scheme": "pbiColorLinear"
+            }
+          }
+          
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "dx": 5
+        },
+        "encoding": {
+          "text": {
+            "field": "Total Sales",
+            "type": "quantitative",
+            "format": "#0,,.0M",
+            "formatType": "pbiFormat"
+          }
+        }
+      }
+    ]
+  }

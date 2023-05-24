@@ -1,0 +1,203 @@
+<root>
+<block id="Enterprise DNA Deneb Snippets 09 - Example - Gantt Chart">
+</block>
+
+<block id="add BAR mark (for task)">
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  }
+</block> 
+<block id="add ENCODING">
+  "encoding": {
+    "y": {
+      "field": "Project",
+      "type": "nominal"
+    },
+    "x": {
+      "field": "Start",
+      "type": "temporal"
+    },
+    "x2": {"field": "End"}
+</block>
+<block id="sort Y-axis by PROJECT">
+ADD TO Y ENCODING
+      "sort": {
+        "op": "sum",
+        "field": "ProjectID"
+      }
+</block>
+<block id="turn off X-axis TITLE">
+ADD TO X ENCODING
+     "axis": {"title": null}
+</block>
+<block id="colour the TASKS and turn off LEGEND">
+ADD COLOR BLOCK TO ENCODING
+    "color": {
+      "field": "Task"
+    }
+
+ADD TO COLOR BLOCK TO TURN OFF LEGEND
+      "legend": null	
+</block>
+<block id="adjust task position in steps">
+ADD TO ENCODING BLOCK
+    "yOffset": {
+      "field": "Task",
+      "sort": {"field": "TaskID"}
+    }
+</block>
+<block id="add TRANSFORM block">
+ADD AFTER DATA BLOCK
+  "transform": [
+    {
+      "calculate": "datum['Completion'] / 100",
+      "as": "percent_completion"
+    }
+  ]
+</block>
+<block id="add TOOLTIP">
+ADD TO ENCODING BLOCK
+    "tooltip": [
+      {"field": "Project"},
+      {"field": "Task"},
+      {"field": "Start"},
+      {"field": "End"},
+      {
+        "field": "percent_completion",
+        "title": "Completion",
+        "format": "#.%",
+        "formatType": "pbiFormat"
+      }
+    ]
+</block> 
+<block id="add LAYER block">
+ADD ABOVE THE BAR MARK
+  "layer": [
+    {
+
+ADD BELOW THE ENCODING BLOCK
+    }
+  ]
+  
+NAME THE BAR MARK
+	"name": "TASK BAR"
+</block>
+<block id="move ENCODING block above LAYER block">
+*** MOVE ENCODING OUTSIDE LAYER ***
+</block> 
+<block id="add TEXT block (for TASK name)">
+ADD BELOW BAR MARK
+    {
+      "name": "TASK NAME",
+      "mark": {
+        "type": "text",
+        "dy": -5,
+        "align": "left",
+        "baseline": "bottom"
+      },
+      "encoding": {
+        "text": {"field": "Task"},
+        "color": {"value": "black"}
+      }
+    }
+</block>
+<block id="add BAR mark (for task percent complete)">
+    {
+      "name": "PERCENT COMPLETION BAR",
+      "mark": {
+        "type": "bar",
+        "tooltip": true,
+        "height": {"band": 1}
+      },
+      "encoding": {
+        "x2": {"field": "End2"},
+        "color": {"value": "black"}
+      }
+    }
+</block> 
+
+<block id="REFERENCE - FULL CODE">
+{
+  "data": {"name": "dataset"},
+  "transform": [
+    {
+      "calculate": "datum['Completion'] / 100",
+      "as": "percent_completion"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "Project",
+      "type": "nominal",
+      "sort": {
+        "op": "sum",
+        "field": "ProjectID"
+      }
+    },
+    "x": {
+      "field": "Start",
+      "type": "temporal",
+      "axis": {"title": null}
+    },
+    "x2": {"field": "End"},
+    "color": {
+      "field": "Task",
+      "legend": null
+    },
+    "yOffset": {
+      "field": "Task",
+      "sort": {"field": "TaskID"}
+    },
+    "tooltip": [
+      {"field": "Project"},
+      {"field": "Task"},
+      {"field": "Start"},
+      {"field": "End"},
+      {
+        "field": "percent_completion",
+        "title": "Completion",
+        "format": "#.%",
+        "formatType": "pbiFormat"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "name": "TASK BAR",
+      "mark": {
+        "type": "bar",
+        "tooltip": true,
+        "height": {"band": 1}
+      }
+    },
+    {
+      "name": "TASK NAME",
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5
+      },
+      "encoding": {
+        "x": {"field": "End"},
+        "text": {"field": "Task"},
+        "color": {"value": "black"}
+      }
+    },
+    {
+      "name": "PERCENT COMPLETION BAR",
+      "mark": {
+        "type": "bar",
+        "tooltip": true,
+        "height": {"band": 1}
+      },
+      "encoding": {
+        "x2": {"field": "End2"},
+        "color": {"value": "black"}
+      }
+    }
+  ]
+}
+</block>
+
+</root>

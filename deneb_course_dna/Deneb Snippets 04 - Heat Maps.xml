@@ -1,0 +1,97 @@
+<root>
+<block id="Enterprise DNA Deneb Snippets 04 - Heat Maps">
+</block>
+
+<block id="add MARK block (rect)">
+  "mark": {"type": "rect"}
+</block>
+<block id="add ENCODING">
+  "encoding": {
+    "x": {
+      "field": "DayOfMonth",
+      "type": "nominal",
+    },
+    "y": {
+      "field": "Country",
+      "type": "nominal"
+    }
+  }
+</block>
+<block id="adjust X-axis label angle">
+ADD TO X-AXIS ENCODING
+      "axis": {
+        "labelAngle": 0
+      }
+</block>
+<block id="adjust X-axis position (orientation)">
+ADD TO X-AXIS, AXIS BLOCK
+        "orient": "top"
+</block>
+<block id="add PADDING between mark">
+ADD TO CONFIG
+	"scale": {"bandPaddingInner": 0.05}
+</block>
+<block id="add FILL colour; turn off LEGEND">
+ADD TO ENCODING
+    "fill": {
+      "field": "Total Sales",
+      "type": "quantitative",
+      "scale": {
+        "range": [
+          "lightblue",
+          "darkblue"
+        ]
+      }
+    }
+	
+TURN OFF LEGEND	- ADD BEFORE SCALE
+      "legend": null,	
+</block>
+<block id="adjust MARK size">
+ADD ABOVE MARK
+  "height": {"step": 30},
+  "width": {"step": 30}
+</block>
+<block id="add padding between RECT marks">
+ADD TO CONFIG
+  "scale": {"bandPaddingInner": 0.05}
+</block>
+
+<block id="REFERENCE - FULL CODE">
+SPECIFICATION
+{
+  "data": {"name": "dataset"},
+  "height": {"step": 30},
+  "width": {"step": 30},
+  "mark": {"type": "rect"},
+  "encoding": {
+    "x": {
+      "field": "DayOfMonth",
+      "type": "nominal",
+      "axis": {
+        "labelAngle": 0,
+        "orient": "top"
+      }
+    },
+    "y": {
+      "field": "Country",
+      "type": "nominal"
+    },
+    "fill": {
+      "field": "Total Sales",
+      "type": "quantitative",
+      "legend": null,
+      "scale": {
+        "range": [
+          "lightblue",
+          "darkblue"
+        ]
+      }
+    }
+  }
+}
+
+CONFIG
+  "scale": {"bandPaddingInner": 0.05}
+</block>
+</root>

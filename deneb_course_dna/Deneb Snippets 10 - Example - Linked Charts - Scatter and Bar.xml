@@ -1,0 +1,190 @@
+<root>
+<block id="Enterprise DNA Deneb Snippets 10 - Example - Linked Charts - Scatter and Bar">
+</block>
+
+<block id="add SCATTER CHART (Primary) in a vertical concatenation block">
+  "vconcat": [
+    {
+      "name": "SCATTER CHART (Primary)",
+      "mark": "point",
+      "encoding": {
+        "x": {
+          "field": "Date",
+          "timeUnit": "monthdate"
+        },
+        "y": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "Product",
+          "type": "nominal"
+        },
+        "size": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        }
+      }
+    }
+  ]
+</block> 
+<block id="set the size of the SCATTER CHART">
+ADD TO SCATTER CHART
+      "width": 800,
+      "height": 350
+</block>
+<block id="set the X-axis format and title">
+ADD TO X ENCODING
+	  "axis": {"format": "%b"},
+	  "title": "Date"
+</block>
+<block id="set the colour">
+ADD TO COLOR BLOCK			
+	"scale": {
+	  "scheme": "pbiColorNominal"
+	}
+</block>
+<block id="add title block">
+ADD TO SCATTER CHART
+      "title": {
+        "text": "Deneb Scatter Chart - Sales by Date (Primary)",
+        "anchor": "start"
+      },
+</block>
+
+<block id="add BAR CHART (Secondary) to the vertical concatenation block">
+    {
+      "name": "BAR CHART (Secondary)",
+      "mark": "bar",
+      "tooltip": true,
+      "encoding": {
+        "x": {
+          "aggregate": "sum",
+          "field": "Total Sales",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "Product",
+          "type": "nominal"
+        },
+        "color": {
+          "field": "Product",
+          "scale": {
+            "scheme": "pbiColorNominal"
+          }
+        }
+      }
+    }
+</block>
+<block id="remove the X-axis title">
+ADD TO X ENCODING
+	   "title": null
+</block>
+<block id="set the size of the BAR CHART">
+ADD BELOW MARK BAR
+      "width": 800,
+      "height": 100
+</block>
+<block id="add title block">
+      "title": {
+        "text": "Deneb Bar Chart - Sales by Product (Secondary)",
+        "anchor": "start"
+      }
+</block>
+
+<block id="add the selection brush to the SCATTER CHART">
+ADD AFTER TITLE BLOCK
+      "selection": {
+        "brush": {
+          "type": "interval",
+          "encodings": ["x"]
+        }
+      }
+</block>
+<block id="add the brush filter to the BAR CHART">
+ADD AFTER ENCODING BLOCK
+      "transform": [
+        {"filter": {"param": "brush"}}
+      ]
+</block>
+
+<block id="REFERENCE - FULL CODE">
+{
+  "data": {"name": "dataset"},
+  "vconcat": [
+    {
+      "title": {
+        "text": "Deneb Scatter Chart - Sales by Date (Primary)",
+        "anchor": "start"
+      },
+      "selection": {
+        "brush": {
+          "type": "interval",
+          "encodings": ["x"]
+        }
+      },
+      "name": "SCATTER CHART (Primary)",
+      "mark": "point",
+      "width": 800,
+      "height": 350,
+      "encoding": {
+        "x": {
+          "field": "Date",
+          "timeUnit": "monthdate",
+          "axis": {"format": "%b"},
+          "title": "Date"
+        },
+        "y": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "Product",
+          "type": "nominal",
+          "scale": {
+            "scheme": "pbiColorNominal"
+          }
+        },
+        "size": {
+          "field": "Total Sales",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "title": {
+        "text": "Deneb Bar Chart - Sales by Product (Secondary)",
+        "anchor": "start"
+      },
+      "name": "BAR CHART (Secondary)",
+      "mark": "bar",
+      "width": 800,
+      "height": 100,
+      "tooltip": true,
+      "encoding": {
+        "x": {
+          "aggregate": "sum",
+          "field": "Total Sales",
+          "type": "quantitative",
+          "title": null
+        },
+        "y": {
+          "field": "Product",
+          "type": "nominal"
+        },
+        "color": {
+          "field": "Product",
+          "scale": {
+            "scheme": "pbiColorNominal"
+          }
+        }
+      },
+      "transform": [
+        {"filter": {"param": "brush"}}
+      ]
+    }
+  ]
+}
+</block>
+
+</root>
