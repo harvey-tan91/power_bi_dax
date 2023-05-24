@@ -1,0 +1,46 @@
+{
+    "data": {"name": "dataset"},
+    "params": [
+      {
+        "name": "interpolate",
+        "value": "linear",
+        "bind": {
+          "input": "select",
+          "options": [
+            "basis",
+            "cardinal",
+            "catmull-rom",
+            "linear",
+            "monotone",
+            "natural",
+            "step",
+            "step-after",
+            "step-before"
+          ]
+        }
+      }
+    ],
+    "mark": {
+      "type": "line",
+      "interpolate": {
+        "expr": "interpolate"
+      }
+    },
+    "encoding": {
+      "x": {
+        "field": "Date",
+        "type": "temporal"
+      },
+      "y": {
+        "field": "2021 Q1 Sales",
+        "type": "quantitative"
+      },
+      "color": {
+        "field": "Country",
+        "type": "nominal",
+        "scale": {
+          "scheme": "pbiColorNominal"
+        }
+      }
+    }
+  }

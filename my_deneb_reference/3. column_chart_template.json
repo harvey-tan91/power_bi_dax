@@ -1,0 +1,23 @@
+{
+    "data": {"name": "dataset"},
+    "mark": {
+      "type": "bar",
+      "tooltip": true
+    },
+    "encoding": {
+      "x": {
+        "field": "Country",
+        "type": "nominal",
+        "axis": {"labelAngle": 0},
+        "sort": {
+          "op": "sum",
+          "field": "Total Sales",
+          "order": "descending"
+        }
+      },
+      "y": {
+        "field": "Total Sales",
+        "type": "quantitative"
+      }
+    }
+  }
