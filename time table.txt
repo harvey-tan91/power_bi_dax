@@ -2,18 +2,15 @@ Time =
 // Objective: Generate a time table with minute granularity
 // Use the Timekey column as the key to form relationship with other tables
 
-VAR series = 
-    GENERATESERIES(1, 1440, 1)
-VAR time = 
-    ADDCOLUMNS(series, "TimeandDay", TIME(0, [Value], 0) )
- 
+VAR HourTable = SELECTCOLUMNS(GENERATESERIES((0), (23)), "Hour", [Value])
+VAR MinuteTable = SELECTCOLUMNS(GENERATESERIES((0), (59)), "Minute", [Value])
+VAR SecondsTable = SELECTCOLUMNS(GENERATESERIES((0), (59)), "Second", [Value])
+
 RETURN
-    ADDCOLUMNS(
-        time,
-        "Timekey", FORMAT([TimeandDay], "hhmm"),
-        "Actual Time", FORMAT([TimeandDay], "HH:MM AM/PM"),
-        "Hour", HOUR([TimeandDay]),
-        "Hour Extended", FORMAT([TimeandDay], "H AM/PM"),
-        "Minute", MINUTE([TimeandDay]),
-        "AMPM", FORMAT([TimeandDay], "AMPM")
-    )
+ 
+ADDCOLUMNS(
+    CROSSJOIN(HourTable, MinuteTable, SecondsTable),
+    "Time", TIME([Hour], [Minute], [Second]), 
+    "AM/PM", IF ( [Hour] < 12 , "AM" , "PM" )
+
+)
