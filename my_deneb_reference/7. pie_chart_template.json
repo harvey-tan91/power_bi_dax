@@ -1,0 +1,18 @@
+{
+    "data": {"name": "dataset"},
+    "mark": {
+      "type": "arc",
+      "outerRadius": 100,
+      "innerRadius": 50
+    },
+    "encoding": {
+      "theta": {
+        "field": "Total Sales",
+        "type": "quantitative"
+      },
+      "color": {
+        "field": "Channel",
+        "type": "nominal"
+      }
+    }
+  }

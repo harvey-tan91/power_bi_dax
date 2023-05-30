@@ -1,0 +1,18 @@
+{
+    "data": {"name": "dataset"},
+    "mark": {"type": "trail"},
+    "encoding": {
+      "x": {
+        "field": "Date",
+        "type": "temporal"
+      },
+      "y": {
+        "field": "2021 Q1 Sales",
+        "type": "quantitative"
+      },
+      "size": {
+        "field": "2021 Q1 Sales",
+        "type": "quantitative"
+      }
+    }
+  }

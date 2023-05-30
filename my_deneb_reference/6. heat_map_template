@@ -1,0 +1,30 @@
+{
+  "data": {"name": "dataset"},
+  "height": {"step": 30},
+  "width": {"step": 30},
+  "mark": {"type": "rect"},
+  "encoding": {
+    "x": {
+      "field": "DayOfMonth",
+      "type": "nominal",
+      "axis": {
+        "labelAngle": 0,
+        "orient": "top"
+      }
+    },
+    "y": {
+      "field": "Country",
+      "type": "nominal"
+    }, 
+    "fill": {
+      "field": "Total Sales",
+      "type": "quantitative",
+      "scale": {
+        "range": [
+          "lightblue",
+          "darkblue"
+        ]
+      }
+    }
+  }
+}

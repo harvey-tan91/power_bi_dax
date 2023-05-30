@@ -1,0 +1,191 @@
+{
+    "data": {"name": "dataset"},
+    "transform": [
+      {
+        "calculate": "360 - 90",
+        "as": "Poor Start Degrees"
+      },
+      {
+        "calculate": "25",
+        "as": "Average Start Percent"
+      },
+      {
+        "calculate": "75",
+        "as": "Good Start Percent"
+      },
+      {
+        "calculate": "datum['Poor Start Degrees'] + ( 180 * datum['Average Start Percent'] / 100 )",
+        "as": "Average Start Degrees"
+      },
+      {
+        "calculate": "datum['Poor Start Degrees'] + ( 180 * datum['Good Start Percent'] / 100 )",
+        "as": "Average End Degrees"
+      },
+      {
+        "calculate": "360 + 90",
+        "as": "Good End Degrees"
+      },
+      {
+        "calculate": "2 * PI * ( datum['Poor Start Degrees'] / 360 )",
+        "as": "Poor Start Radians"
+      },
+      {
+        "calculate": "datum['Poor Start Radians'] + ( PI * ( datum['Average Start Percent'] / 100 ) )",
+        "as": "Average Start Radians"
+      },
+      {
+        "calculate": "datum['Poor Start Radians'] + ( PI * ( datum['Good Start Percent'] / 100 ) )",
+        "as": "Average End Radians"
+      },
+      {
+        "calculate": "2 * PI * ( datum['Good End Degrees'] / 360 )",
+        "as": "Good End Radians"
+      },
+      {
+        "calculate": "datum['Needle Percent'] * 100",
+        "as": "Needle Percent2"
+      },
+      {
+        "calculate": "datum['Poor Start Radians'] + PI * ( ( datum['Needle Percent2'] - 0.5 ) / 100 )",
+        "as": "Needle Start Radians"
+      },
+      {
+        "calculate": "datum['Poor Start Radians'] + PI * ( ( datum['Needle Percent2'] + 0.5 ) / 100 )",
+        "as": "Needle End Radians"
+      }
+    ],
+    "params": [
+      {"name": "ring_max", "value": 200},
+      {"name": "ring_width", "value": 20},
+      {"name": "ring_gap", "value": 5},
+      {
+        "name": "ring0_color",
+        "value": "#FFFFFF"
+      },
+      {
+        "name": "ring0_percent",
+        "value": 100
+      },
+      {
+        "name": "ring0_outer",
+        "expr": "ring_max+2"
+      },
+      {
+        "name": "ring0_inner",
+        "expr": "ring_max+1"
+      },
+      {
+        "name": "ring1_outer",
+        "expr": "ring0_inner-ring_gap"
+      },
+      {
+        "name": "ring1_inner",
+        "expr": "ring1_outer-ring_width"
+      },
+      {
+        "name": "ring1_middle",
+        "expr": "(ring1_outer+ring1_inner)/2"
+      }
+    ],
+    "layer": [
+      {
+        "name": "POOR",
+        "mark": {
+          "type": "arc",
+          "outerRadius": {
+            "expr": "ring1_outer"
+          },
+          "innerRadius": {
+            "expr": "ring1_inner"
+          },
+          "theta": {
+            "expr": "datum['Poor Start Radians']"
+          },
+          "theta2": {
+            "expr": "datum['Average Start Radians']"
+          }
+        },
+        "encoding": {
+          "color": {"value": "red"}
+        }
+      },
+      {
+        "name": "AVERAGE",
+        "mark": {
+          "type": "arc",
+          "outerRadius": {
+            "expr": "ring1_outer"
+          },
+          "innerRadius": {
+            "expr": "ring1_inner"
+          },
+          "theta": {
+            "expr": "datum['Average Start Radians']"
+          },
+          "theta2": {
+            "expr": "datum['Average End Radians']"
+          }
+        },
+        "encoding": {
+          "color": {"value": "yellow"}
+        }
+      },
+      {
+        "name": "GOOD",
+        "mark": {
+          "type": "arc",
+          "outerRadius": {
+            "expr": "ring1_outer"
+          },
+          "innerRadius": {
+            "expr": "ring1_inner"
+          },
+          "theta": {
+            "expr": "datum['Average End Radians']"
+          },
+          "theta2": {
+            "expr": "datum['Good End Radians']"
+          }
+        },
+        "encoding": {
+          "color": {"value": "green"}
+        }
+      },
+      {
+        "name": "NEEDLE",
+        "mark": {
+          "type": "arc",
+          "outerRadius": {
+            "expr": "ring1_outer"
+          },
+          "innerRadius": 0,
+          "theta": {
+            "expr": "datum['Needle Start Radians']"
+          },
+          "theta2": {
+            "expr": "datum['Needle End Radians']"
+          }
+        },
+        "encoding": {
+          "color": {"value": "black"}
+        }
+      },
+      {
+        "name": "PERCENT",
+        "mark": {
+          "type": "text",
+          "fontSize": 24,
+          "align": "center",
+          "dy": 20,
+          "color": "black"
+        },
+        "encoding": {
+          "text": {
+            "field": "Needle Percent",
+            "format": "#%",
+            "formatType": "pbiFormat"
+          }
+        }
+      }
+    ]
+  }

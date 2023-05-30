@@ -1,0 +1,79 @@
+{
+    "data": {"name": "dataset"},
+    "transform": [
+      {
+        "calculate": "datum['Completion'] / 100",
+        "as": "percent_completion"
+      }
+    ],
+    "encoding": {
+      "y": {
+        "field": "Project",
+        "type": "nominal",
+        "sort": {
+          "op": "sum",
+          "field": "ProjectID"
+        }
+      },
+      "x": {
+        "field": "Start",
+        "type": "temporal",
+        "axis": {"title": null}
+      },
+      "x2": {"field": "End"},
+      "color": {
+        "field": "Task",
+        "legend": null
+      },
+      "yOffset": {
+        "field": "Task",
+        "sort": {"field": "TaskID"}
+      },
+      "tooltip": [
+        {"field": "Project"},
+        {"field": "Task"},
+        {"field": "Start"},
+        {"field": "End"},
+        {
+          "field": "percent_completion",
+          "title": "Completion",
+          "format": "#.%",
+          "formatType": "pbiFormat"
+        }
+      ]
+    },
+    "layer": [
+      {
+        "name": "TASK BAR",
+        "mark": {
+          "type": "bar",
+          "tooltip": true
+        }
+      },
+      {
+        "name": "TASK NAME",
+        "mark": {
+          "type": "text",
+          "dy": -5,
+          "align": "left",
+          "baseline": "bottom"
+        },
+        "encoding": {
+          "text": {"field": "Task"},
+          "color": {"value": "black"}
+        }
+      },
+      {
+        "name": "PERCENT COMPLETION BAR",
+        "mark": {
+          "type": "bar",
+          "tooltip": true,
+          "height": {"band": 1}
+        },
+        "encoding": {
+          "x2": {"field": "End2"},
+          "color": {"value": "black"}
+        }
+      }
+    ]
+  }

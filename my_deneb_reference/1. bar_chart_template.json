@@ -25,7 +25,10 @@
     },
     "layer": [
       {
-        "mark": {"type": "bar"},
+        "mark": {
+          "type": "bar",
+          "tooltip": true
+        },
         "encoding": {
           "color": {
             "field": "Total Sales",

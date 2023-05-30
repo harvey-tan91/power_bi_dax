@@ -1,0 +1,76 @@
+{
+    "data": {"name": "dataset"},
+    "vconcat": [
+      {
+        "name": "SCATTER CHART (Primary)",
+        "title": {
+          "text": "Deneb Scatter Chart - Sales by Date (Primary)",
+          "anchor": "start"
+        },
+        "selection": {
+          "brush": {
+            "type": "interval",
+            "encodings": ["x"]
+          }
+        },
+        "width": 800,
+        "height": 350,
+        "mark": "point",
+        "encoding": {
+          "x": {
+            "field": "Date",
+            "timeUnit": "monthdate",
+            "axis": {"format": "%b"},
+            "title": "Date"
+          },
+          "y": {
+            "field": "Total Sales",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "Product",
+            "type": "nominal",
+            "scale": {
+              "scheme": "pbiColorNominal"
+            }
+          },
+          "size": {
+            "field": "Total Sales",
+            "type": "quantitative"
+          }
+        }
+      },
+      {
+        "name": "BAR CHART (Secondary)",
+        "title": {
+          "text": "Deneb Bar Chart - Sales by Product (Secondary)",
+          "anchor": "start"
+        },
+        "mark": "bar",
+        "width": 800,
+        "height": 100,
+        "tooltip": true,
+        "encoding": {
+          "x": {
+            "aggregate": "sum",
+            "field": "Total Sales",
+            "type": "quantitative",
+            "title": null
+          },
+          "y": {
+            "field": "Product",
+            "type": "nominal"
+          },
+          "color": {
+            "field": "Product",
+            "scale": {
+              "scheme": "pbiColorNominal"
+            }
+          }
+        },
+        "transform": [
+          {"filter": {"param": "brush"}}
+        ]
+      }
+    ]
+  }

@@ -1,0 +1,60 @@
+{
+    "data": {"name": "dataset"},
+    "vconcat": [
+      {
+        "title": {
+          "text": "Overview",
+          "anchor": "start"
+        },
+        "mark": {
+          "type": "area",
+          "color": "#6086BC"
+        },
+        "width": 1000,
+        "height": 200,
+        "encoding": {
+          "x": {
+            "field": "Date",
+            "type": "temporal",
+            "timeunit": "month"
+          },
+          "y": {
+            "field": "Total Sales",
+            "type": "quantitative"
+          }
+        },
+        "selection": {
+          "brush": {
+            "type": "interval",
+            "encodings": ["x"]
+          }
+        }
+      },
+      {
+        "title": {
+          "text": "Detail",
+          "anchor": "start"
+        },
+        "mark": {
+          "type": "area",
+          "color": "#6086BC"
+        },
+        "width": 1000,
+        "height": 250,
+        "encoding": {
+          "x": {
+            "field": "Date",
+            "type": "temporal",
+            "axis": {"title": "Date"}
+          },
+          "y": {
+            "field": "Total Sales",
+            "type": "quantitative"
+          }
+        },
+        "transform": [
+          {"filter": {"param": "brush"}}
+        ]
+      }
+    ]
+  }
